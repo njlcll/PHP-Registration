@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
 
 			//redirect to index page
 
-			
+
 			//header('Location: index.php?action=joined');
 			//exit;
 

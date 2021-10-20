@@ -16,4 +16,4 @@ require_once('layout/header.php');
 
 <?php
 //include header template
-require('layout/footer.php');
+require('footer.php');

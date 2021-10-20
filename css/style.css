@@ -58,7 +58,17 @@ body {
   margin-right: 0px !important;
 }
 
+
+.form-holder{
+  width: 100%;
+  max-width: 650px;
+  background-color: white;
+}
+
+
 @media (min-width: 576px) {
+  
+  
   .navbar .navbar-brand {
     background-image: url(../images/Rotary_sm.png);
     background-repeat: no-repeat;
@@ -81,6 +91,7 @@ body {
 
 }
 @media (min-width: 767px) {
+  
   .navbar .navbar-brand {
     background-image: url(../images/Rotary.png);
     background-repeat: no-repeat;
@@ -105,6 +116,7 @@ body {
   
 }
 @media (min-width: 1024px) {
+  
   .navbar .navbar-brand {
     background-image: url(../images/Rotary.png);
     background-repeat: no-repeat;
@@ -194,4 +206,3 @@ a {
   /* background-color: red;
   max-width: 50%; */
 }
-
