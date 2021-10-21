@@ -9,7 +9,7 @@ class User
 		$this->_db = $db;
 	}
 
-	private function get_user_details_from_email($email)
+	public  function get_user_details_from_email($email)
 	{
 		try {
 			$stmt = $this->_db->prepare('
@@ -21,7 +21,23 @@ class User
 
 			return $stmt->fetch();
 		} catch (PDOException $e) {
-			echo '<p class="bg-danger">' . $e->getMessage() . '</p>';
+			echo '<p class="bg-danger"> get_user_details_from_email' . $e->getMessage() . '</p>';
+		}
+	}
+
+	public  function get_user_details_from_id($id)
+	{
+		try {
+			$stmt = $this->_db->prepare('
+			SELECT 
+			*
+			FROM users WHERE 
+			id = :id AND active=1 ');
+			$stmt->execute(array('id' => $id));
+
+			return $stmt->fetch();
+		} catch (PDOException $e) {
+			echo '<p class="bg-danger"> get_user_details_from_id' . $e->getMessage() . '</p>';
 		}
 	}
 
@@ -42,7 +58,7 @@ class User
 		return true;
 	}
 
-	public   function check_password($post, &$error)
+	public function check_password($post, &$error)
 	{
 
 		//basic validation
@@ -65,30 +81,70 @@ class User
 
 		$_SESSION['priv'] = $row['priv'];
 		$_SESSION['id'] = $row['id'];
-	
 	}
 
 	public function login($email, $password)
 	{
-	
+
 		$row = $this->get_user_details_from_email($email);
 
 		$row['password'] = $row['password'] ?? "";
 		if (password_verify($password, $row['password'])) {
 			$this->setSessions($row);
-			return true;
+
+			$sql = "UPDATE users 
+			SET 
+			last_log=?,  
+			resetToken=?
+			WHERE id=?";
+			$stmt = $this->_db->prepare($sql);
+			$date = date('Y/m/d H:i:s');
+			$stmt->execute([$date, "", $row['id']]);
+			return $row['id'];
 		}
+		return false;
 	}
 
 	public function logout()
 	{
 		session_destroy();
+		setcookie(COOKIE_NAME, "", time() - (60 * 60 * 24));
 	}
 
 	public function is_logged_in()
 	{
-		if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+		if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
 			return true;
 		}
+
+		if (!empty($_COOKIE[COOKIE_NAME])) {
+
+			$stmt = $this->_db->prepare('
+			SELECT 
+			*
+			FROM users WHERE 
+			cookie = :cookie AND active=1 ');
+			$stmt->execute(array('cookie' => $_COOKIE[COOKIE_NAME]));
+
+			if ($row_count = $stmt->rowCount()) {
+				$row = $stmt->fetch();
+				$this->login($row['email'], $row['password']);
+
+
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+}
+
+function has_access($access)
+{
+	if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
+		return $_SESSION['priv'];
+	} else {
+		return 0;
 	}
 }

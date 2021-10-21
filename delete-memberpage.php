@@ -12,6 +12,7 @@ $title = 'Members Page';
 
 //include header template
 require_once('layout/header.php'); 
+die();
 ?>
 
 	<div class="row">

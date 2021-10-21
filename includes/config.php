@@ -12,13 +12,22 @@ function isLocalhost($whitelist = ['127.0.0.1', '::1'])
 //set timezone
 date_default_timezone_set('Europe/London');
 
+
+define ('COOKIE_NAME', 'enfieldrem');
+define ('COOKIE_SALT', 'UaZMBqi7NA');
+
+
 define ('MIN_PASSWORD_LENGTH', 6);
 if (isLocalhost()) {
+
+    define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
     define('DBHOST', 'localhost');
     define('DBUSER', 'root');
     define('DBPASS', '');
     define('DBNAME', 'enfield');
 } else {
+
+    define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
     define('DBHOST', 'localhost');
     define('DBUSER', 'root');
     define('DBPASS', '');

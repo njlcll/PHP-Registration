@@ -1,14 +1,19 @@
 <?php require('includes/config.php'); 
 
+if (!$user->is_logged_in()) {
+	header('Location: index.php');
+	exit();
+}
+
 if(isset($_POST['submit'])){
-	require_once("includes/resetPassword.php");
+	require_once("includes/inc-resetPassword.php");
 }
 
 //define page title
 $title = 'Reset Account';
 
 //include header template
-require_once('layout/header.php'); 
+require_once('header.php'); 
 ?>
 
 
@@ -78,5 +83,5 @@ require_once('layout/header.php');
 
 <?php 
 //include header template
-require('layout/footer.php'); 
+require('footer.php'); 
 ?>

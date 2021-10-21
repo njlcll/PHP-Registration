@@ -28,6 +28,9 @@
           <span class="cbName">
             <a class="nav-link font-weight-light font-smaller" href="./"> Enfield Chase </a>
           </span>
+          <span class="member-link d-none d-lg-block">
+            <a class="nav-link font-weight-light font-smaller" href="./members.php">Members</a>
+          </span>
           <button
             class="navbar-toggler"
             type="button"

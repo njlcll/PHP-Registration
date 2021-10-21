@@ -13,7 +13,7 @@ if (isset($_POST['submit'])){
 	if (! filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
 	    $error[] = 'Please enter a valid email address';
 	} else {
-		$stmt = $db->prepare('SELECT email FROM members WHERE email = :email');
+		$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
 		$stmt->execute(array(':email' => $_POST['email']));
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -31,7 +31,8 @@ if (isset($_POST['submit'])){
 
 		try {
 
-			$stmt = $db->prepare("UPDATE members SET resetToken = :token, resetComplete='No'
+			$stmt = $db->prepare("UPDATE users 
+			SET resetToken = :token
 			 WHERE
 			 email = :email");
 			$stmt->execute(array(
@@ -44,8 +45,10 @@ if (isset($_POST['submit'])){
 			$subject = "Password Reset";
 			$body = "<p>Someone requested that the password be reset.</p>
 			<p>If this was a mistake, just ignore this email and nothing will happen.</p>
-			<p>To reset your password, visit the following address: <a href='".DIR."resetPassword.php?key=$token'>".DIR."resetPassword.php?key=$token</a></p>";
+			<p>To reset your password, visit the following address: 
+			<a href='".SITENAME."tokenPassword.php?resetToken=$token'>".SITENAME."tokenPassword.php?resetToken=$token</a></p>";
 
+		echo $body ;
 			$mail = new Mail();
 			$mail->setFrom(SITEEMAIL);
 			$mail->addAddress($to);
@@ -54,8 +57,8 @@ if (isset($_POST['submit'])){
 			$mail->send();
 
 			//redirect to index page
-			header('Location: login.php?action=reset');
-			exit;
+			//header('Location: login.php?action=reset');
+			//exit;
 
 		//else catch the exception and show the error.
 		} catch(PDOException $e) {

@@ -1,20 +1,19 @@
 <?php require('includes/config.php');
 
-require_once("header.php");
+
 
 //define page title
 $title = 'Registration';
 
-//if logged in redirect to  page
-echo "do this @********************";
+
 if ($user->is_logged_in()) {
-	header('Location: index.php');
+	header('Location: members.php');
 	exit();
 }
 if (isset($_POST['submit'])) {
 	require_once("includes/inc-registration.php");
 }
-
+require_once("header.php");
 ?>
 <div class="d-flex justify-content-center align-items-center">
 	<div class="row form-holder">
@@ -40,34 +39,34 @@ if (isset($_POST['submit'])) {
 				// }
 				?>
 
-				<div class="form-group">
+				<div class="form-group p-2">
 					<input type="text" name="name" id="name" class="form-control input-lg" placeholder="First Name" value="<?php if (isset($error)) {
 																																echo htmlspecialchars($_POST['name'], ENT_QUOTES);
 																															} ?>" tabindex="1">
 				</div>
-				<div class="form-group">
+				<div class="form-group  p-2">
 					<input type="text" name="surname" id="surname" class="form-control input-lg" placeholder="Last Name" value="<?php if (isset($error)) {
 																																	echo htmlspecialchars($_POST['surname'], ENT_QUOTES);
 																																} ?>" tabindex="1">
 				</div>
-				<div class="form-group">
+				<div class="form-group  p-2">
 					<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" value="<?php if (isset($error)) {
 																																		echo htmlspecialchars($_POST['email'], ENT_QUOTES);
 																																	} ?>" tabindex="2">
 				  </div>
-				<div class="form-group">
+				<div class="form-group  p-2">
 					<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="3">
 
 				</div>
 
-				<div class="form-group">
+				<div class="form-group  p-2">
 					<input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control input-lg" placeholder="Confirm Password" tabindex="4">
 				</div>
 
 
 
 				<div class="row">
-					<div class="col-xs-6 col-md-6 mt-3"><input type="submit" name="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
+					<div class="col-xs-6 col-md-6 mt-3  p-2"><input type="submit" name="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="5"></div>
 				</div>
 			</form>
 		</div>
