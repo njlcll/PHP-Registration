@@ -15,27 +15,6 @@ if (isset($_POST['submit'])) {
 
 	if ($userId = $user->login($email, $password)) {
 
-		// $stmt = $db->prepare('
-		// 	SELECT 
-		// 	*
-		// 	FROM users WHERE 
-		// 	id = :id AND active=1 ');
-		// $stmt->execute(array('id' => $userId));
-
-		// $row =  $stmt->fetch();
-
-		// $user->setSessions($row);
-
-		
-
-		// $sql = "UPDATE users 
-		// SET 
-		// last_log=?,  
-		// resetToken=?
-		// WHERE id=?";
-		// $stmt = $db->prepare($sql);
-		// $date = date('Y/m/d H:i:s');
-		// $stmt->execute([$date, "", $row['id']]);
 	
 		if ($_POST['remember']) {
 
