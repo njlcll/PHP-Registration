@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
 ?>
 		<div class="d-flex justify-content-center align-items-center">
 			<div class="row form-holder">
-				<div class="col-12">
-					A link has been sent to login
+				<div class="col-12 p-3">
+					A link has been sent for you to login with a temporary password.
 				</div>
 			</div>
 		</div>

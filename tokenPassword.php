@@ -5,7 +5,7 @@ if ($user->is_logged_in()) {
     exit();
 }
 
-if (isset($_GET['resetToken']) && $_GET['resetToken']) {
+if (isset($_GET['resetToken']) && strlen($_GET['resetToken']) ) {
 
     $stmt = $db->prepare('
     SELECT 
@@ -64,7 +64,7 @@ require_once('header.php');
         } else { ?>
 
             <div class="row">
-                <div class="col-12 text-center bg-info">
+                <div class="col-12 text-center fs-3 p3 m-4">
                     Please choose a
                     <a href="changePassword.php">new password</a>
                      to continue using the site

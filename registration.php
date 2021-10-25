@@ -5,16 +5,17 @@
 //define page title
 $title = 'Registration';
 
-
+if (isset($_POST['submit'])) {
+	require_once("includes/inc-registration.php");
+}
 if ($user->is_logged_in()) {
 	header('Location: members.php');
 	exit();
 }
-if (isset($_POST['submit'])) {
-	require_once("includes/inc-registration.php");
-}
+
 require_once("header.php");
 ?>
+
 <div class="d-flex justify-content-center align-items-center">
 	<div class="row form-holder">
 

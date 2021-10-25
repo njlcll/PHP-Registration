@@ -14,10 +14,14 @@ if(isset($_POST['submit'])){
 		$hashedpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);		
 		try {
 
-            $stmt = $db->prepare("UPDATE users SET password = :hashedpassword
+            $stmt = $db->prepare("
+			UPDATE users SET 
+			password = :hashedpassword,
+			resetToken = :resetToken
               WHERE id = :id");
 				$stmt->execute(array(
                     ':hashedpassword' => $hashedpassword,
+                    ':resetToken' => "",
                     ':id' => $_SESSION['id']
                 ));
                 header('Location: members.php');

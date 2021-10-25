@@ -41,22 +41,22 @@ class User
 		}
 	}
 
-	public function isValidUsername($username)
-	{
-		if (strlen($username) < 3) {
-			return false;
-		}
+	// public function isValidUsername($username)
+	// {
+	// 	if (strlen($username) < 3) {
+	// 		return false;
+	// 	}
 
-		if (strlen($username) > 17) {
-			return false;
-		}
+	// 	if (strlen($username) > 17) {
+	// 		return false;
+	// 	}
 
-		if (!ctype_alnum($username)) {
-			return false;
-		}
+	// 	if (!ctype_alnum($username)) {
+	// 		return false;
+	// 	}
 
-		return true;
-	}
+	// 	return true;
+	// }
 
 	public function check_password($post, &$error)
 	{
@@ -78,7 +78,6 @@ class User
 
 	public function setSessions($row)
 	{
-
 		$_SESSION['priv'] = $row['priv'];
 		$_SESSION['id'] = $row['id'];
 	}
@@ -113,8 +112,8 @@ class User
 
 	public function is_logged_in()
 	{
-		if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
-			return true;
+		if (isset($_SESSION['id']) &&  $_SESSION['id']) {
+			return $_SESSION['id'];
 		}
 
 		if (!empty($_COOKIE[COOKIE_NAME])) {
@@ -127,12 +126,19 @@ class User
 			$stmt->execute(array('cookie' => $_COOKIE[COOKIE_NAME]));
 
 			if ($row_count = $stmt->rowCount()) {
+
 				$row = $stmt->fetch();
-				$this->login($row['email'], $row['password']);
+				$this->setSessions($row);
 
-
-
-				return true;
+				$sql = "UPDATE users 
+					SET 
+					last_log=?,  
+					resetToken=?
+					WHERE id=?";
+					$stmt = $this->_db->prepare($sql);
+					$date = date('Y/m/d H:i:s');
+					$stmt->execute([$date, "", $row['id']]);
+					return $row['id'];				
 			}
 		}
 
@@ -140,7 +146,7 @@ class User
 	}
 }
 
-function has_access($access)
+function hasAccess($access)
 {
 	if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
 		return $_SESSION['priv'];

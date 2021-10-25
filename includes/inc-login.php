@@ -14,7 +14,6 @@ if (isset($_POST['submit'])) {
 	$password = $_POST['password'] ?? "";;
 
 	if ($userId = $user->login($email, $password)) {
-
 	
 		if ($_POST['remember']) {
 
@@ -23,7 +22,6 @@ if (isset($_POST['submit'])) {
 				COOKIE_NAME,
 				$cookieValue,
 				time() + 31556926,
-
 			);
 
 			$sql = "UPDATE users SET cookie=? WHERE id=? LIMIT 1";

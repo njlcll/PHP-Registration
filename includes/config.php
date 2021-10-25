@@ -25,16 +25,21 @@ if (isLocalhost()) {
     define('DBUSER', 'root');
     define('DBPASS', '');
     define('DBNAME', 'enfield');
+    define('IS_LOCAL', true);
+
+
 } else {
 
     define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
     define('DBHOST', 'localhost');
-    define('DBUSER', 'root');
-    define('DBPASS', '');
-    define('DBNAME', 'enfield');
+    define('DBUSER', 'fishtan2_enfield');
+    define('DBPASS', '0O6q;OU+?LqQ');
+    define('DBNAME', 'fishtan2_enfield');
+
+    define('IS_LOCAL', false);
 }
 
-define('SITEEMAIL', 'noreply@domain.com');
+define('SITEEMAIL', 'admin@fishtankpumps.co.uk');
 
 try {
 

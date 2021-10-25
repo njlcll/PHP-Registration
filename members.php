@@ -2,7 +2,7 @@
 //include config
 require_once('includes/config.php');
 if (!$user->is_logged_in()) {
-    header('Location: login.php');
+   header('Location: login.php');
     exit();
 }
 // print_r($_SESSION);
@@ -14,6 +14,7 @@ $title = 'PHP Registration and Login Demo :-Home';
 require_once('header.php');
 
 ?>
+
 <main>
     <div id="main ">
         <div class="container mainTest">
