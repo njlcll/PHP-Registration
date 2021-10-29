@@ -135,22 +135,26 @@ class User
 					last_log=?,  
 					resetToken=?
 					WHERE id=?";
-					$stmt = $this->_db->prepare($sql);
-					$date = date('Y/m/d H:i:s');
-					$stmt->execute([$date, "", $row['id']]);
-					return $row['id'];				
+				$stmt = $this->_db->prepare($sql);
+				$date = date('Y/m/d H:i:s');
+				$stmt->execute([$date, "", $row['id']]);
+				return $row['id'];
 			}
 		}
 
 		return false;
 	}
-}
 
-function hasAccess($access)
-{
-	if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
-		return $_SESSION['priv'];
-	} else {
-		return 0;
+	function hasAccess($access)
+	{
+		if (!$this->is_logged_in()) {
+			return 0;
+		}
+		if (isset($_SESSION['priv']) &&  $_SESSION['priv']) {
+			return $_SESSION['priv'] & $access;
+			echo $_SESSION['priv'] | $access;
+		} else {
+			return 0;
+		}
 	}
 }

@@ -2,7 +2,7 @@
 //include config
 require_once('includes/config.php');
 if (!$user->is_logged_in()) {
-   header('Location: login.php');
+    header('Location: login.php');
     exit();
 }
 // print_r($_SESSION);
@@ -11,107 +11,66 @@ if (!$user->is_logged_in()) {
 $title = 'PHP Registration and Login Demo :-Home';
 
 //include header template
-require_once('header.php');
 
+$row = $user->get_user_details_from_id($_SESSION['id']);
+
+require_once('header.php');
+echo $_SESSION['priv'];
 ?>
 
 <main>
-    <div id="main ">
-        <div class="container mainTest">
-            
+    <div id="main">
+        <div class="container-fluid w-100 m-0 p-0  bg-white">
 
-            <div class="row mt-2">
-                <div class="col-md-8 col-sm-12">
-                    <div class="content-left">
-                        <div class="card p-3" style="width: 100%">
-                            <?php
-                                $row = $user->get_user_details_from_id($_SESSION['id']);
-                         
-                                ?>
-                                <h4>Member Details</h4>
-                                <div class="name"><?php echo "$row[name] $row[surname]" ?></div>
-                                <div class="email"><?php echo "$row[email]" ?></div>
-                                <div class="password"><a href="changePassword.php">Change Password </a></div>
-                                <a class="" href="logout.php">logout</a>
-                          
-                        </div>
-                        
+
+
+            <div class="row">
+                <div class="col-sm-12 col-md-3 ">
+                    <div class="left-nav-container">
+
+                    <ul class="nav list-group list-group-horizontal-sm list-group-vertical-md">
+                        <li class="nav-item admin-nav-left">
+                            <a class="nav-link nav-rotary" aria-current="page" href="#">My stuff</a>
+                        </li>
+
+                        <li class="nav-item admin-nav-left">
+                            <a class="nav-link nav-rotary" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li>
+                     
+                    </ul>
+                    <?php
+                        include_once(dirname(__FILE__)."/memberNav.php");
+                    ?>
+
                     </div>
+
+                    <!-- </div> -->
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="content-right">
-                        <div class="card mt-2" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <div class="col-md-9 col-sm-12 p-3">
+                    <!-- <div class="admin-right p-3 "> -->
+                    <div class="row">
+                        <div class="col-12 text-center">
 
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-primary btn-block">Go somewhere</a>
-                                </div>
-                            </div>
+                        <div class="p-3" data-initials="<?php echo $row['name'][0].$row['surname'][0] ?>"></div>
+
+                            <div class="h2">Welcome <?php echo "$row[name] $row[surname]" ?></div>
+
                         </div>
-
-                        <div class="card mt-2" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-primary btn-block">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-2" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-primary btn-block">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-2" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-primary btn-block">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-2" style="width: 100%">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <p>More Content</p>
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-primary btn-block">Go somewhere</a>
-                                </div>
-                            </div>
+                        <div class="col-12 ">
+                            <!-- <div class="email"><?php echo "$row[email]" ?></div> -->
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum vel ex ut sed omnis expedita quasi officia quos voluptatem optio dolorem quae accusantium molestias fugit necessitatibus pariatur iure voluptatibus, debitis illo hic quisquam obcaecati. Impedit, iure illo maiores provident consequuntur ipsam libero explicabo assumenda dolores dicta dignissimos doloribus.</p>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum vel ex ut sed omnis expedita quasi officia quos voluptatem optio dolorem quae accusantium molestias fugit necessitatibus pariatur iure voluptatibus, debitis illo hic quisquam obcaecati. Impedit, iure illo maiores provident consequuntur ipsam libero explicabo assumenda dolores dicta dignissimos doloribus.</p>
                         </div>
                     </div>
+
+
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
-    </div>
+
 </main>
-?>
+
 
 <?php
 //include header template

@@ -15,9 +15,13 @@ date_default_timezone_set('Europe/London');
 
 define ('COOKIE_NAME', 'enfieldrem');
 define ('COOKIE_SALT', 'UaZMBqi7NA');
-
-
 define ('MIN_PASSWORD_LENGTH', 6);
+
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', __DIR__ . '/' );
+}
+
+
 if (isLocalhost()) {
 
     define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
@@ -87,3 +91,4 @@ function interpolateQuery($query, $params) {
 include( dirname(__FILE__).'/user.php');
 
 $user = new User($db);
+

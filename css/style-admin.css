@@ -1,0 +1,50 @@
+.admin-left {
+  background-color: white;
+}
+
+.admin-right {
+  background-color: white;
+}
+
+/* force left nav vertical */
+@media (min-width: 767px) {
+  .left-nav-container{
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(189, 185, 185);
+    margin-left: 2px;
+    margin-top: 5px;;
+  }
+  .admin-nav-left {
+    width: 100%;
+  }
+}
+
+/*  left nav horizontal on smaller */
+@media (max-width: 766px) {
+  .admin-nav-left {
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+[data-initials]:before {
+  background: #099bdd;
+  color: white;
+  opacity: 1; 
+  content: attr(data-initials); 
+  display: inline-block; 
+  font-weight: bold; 
+  border-radius: 50%; 
+  vertical-align: middle; 
+  margin-right: 0.5em; 
+  width: 50px; 
+  height: 50px; 
+  line-height: 50px; 
+  text-align: center; 
+
+  }
+
+
+
