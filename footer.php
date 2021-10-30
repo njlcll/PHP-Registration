@@ -13,7 +13,7 @@
 
                 <div class="col-sm-12 col-md-6 text-center pt-3">
                   <h6>LINKS & NEWS</h6>
-                  Rotary International <br />
+                  Rotary International  <br />
                   bbbb<br />
                   cccc<br />
                 </div>

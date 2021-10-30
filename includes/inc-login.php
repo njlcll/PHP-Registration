@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 			setcookie(
 				COOKIE_NAME,
 				$cookieValue,
-				time() + 31556926,
+				time() + (60*60*24*365),
 			);
 
 			$sql = "UPDATE users SET cookie=? WHERE id=? LIMIT 1";

@@ -1,6 +1,6 @@
 <?php
 //include config
-require_once('includes/config.php');
+require_once('config.php');
 if (!$user->is_logged_in()) {
     header('Location: login.php');
     exit();
@@ -15,26 +15,24 @@ $title = 'PHP Registration and Login Demo :-Home';
 $row = $user->get_user_details_from_id($_SESSION['id']);
 
 require_once('header.php');
-echo $_SESSION['priv'];
+
 ?>
 
 <main>
     <div id="main">
         <div class="container-fluid w-100 m-0 p-0  bg-white">
 
-
-
             <div class="row">
-                <div class="col-sm-12 col-md-3 ">
+                <div class="col-sm-12 col-md-2 ">
                     <div class="left-nav-container">
 
                     <ul class="nav list-group list-group-horizontal-sm list-group-vertical-md">
                         <li class="nav-item admin-nav-left">
-                            <a class="nav-link nav-rotary" aria-current="page" href="#">My stuff</a>
+                            <a class="nav-link nav-rotary" aria-current="page" href="changePassword">Change Password</a>
                         </li>
 
                         <li class="nav-item admin-nav-left">
-                            <a class="nav-link nav-rotary" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            <a class="nav-link nav-rotary" href="template.php" tabindex="-1" >Example </a>
                         </li>
                      
                     </ul>
@@ -46,14 +44,14 @@ echo $_SESSION['priv'];
 
                     <!-- </div> -->
                 </div>
-                <div class="col-md-9 col-sm-12 p-3">
+                <div class="col-md-10 col-sm-12 p-3  ">
                     <!-- <div class="admin-right p-3 "> -->
                     <div class="row">
-                        <div class="col-12 text-center">
+                        <div class="col-12 text-center ">
 
-                        <div class="p-3" data-initials="<?php echo $row['name'][0].$row['surname'][0] ?>"></div>
+                        <div class="p-3 mb-2 " data-initials="<?php echo $row['name'][0].$row['surname'][0] ?>"></div>
 
-                            <div class="h2">Welcome <?php echo "$row[name] $row[surname]" ?></div>
+                            <div class="h2 text-start">Welcome <?php echo "$row[name] $row[surname]" ?></div>
 
                         </div>
                         <div class="col-12 ">

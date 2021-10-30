@@ -1,4 +1,4 @@
-<?php require('includes/config.php');
+<?php require('config.php');
 
 //if logged in redirect to members page
 if ($user->is_logged_in()) {

@@ -1,4 +1,4 @@
-<?php require('includes/config.php');
+<?php require('config.php');
 
 if ($user->is_logged_in()) {
     header('Location: members.php');

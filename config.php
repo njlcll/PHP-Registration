@@ -1,45 +1,65 @@
 <?php
-
-if ( ! defined( 'ABSPATH' ) ) {
-	define( 'ABSPATH', __DIR__ . '/' );
-}
-
+//
 session_start();
 
-require_once(ABSPATH.'classes/user.php');
-require_once(ABSPATH.'classes/phpmailer/mail.php');
+function isLocalhost($whitelist = ['127.0.0.1', '::1'])
+{
+    return in_array($_SERVER['REMOTE_ADDR'], $whitelist);
+}
+
 
 
 //set timezone
 date_default_timezone_set('Europe/London');
 
-//database credentials
-define('DBHOST', 'localhost');
-define('DBUSER', 'root');
-define('DBPASS', '');
-define('DBNAME', 'job');
-define('DIR', 'localhost/dev/reg/');
-define('SITEEMAIL', 'noreply@domain.com');
-define('MIN_PASSWORD_LENGTH', 4);
 
-function get_db()
-{
-    $db = null;
-    try {
+define ('COOKIE_NAME', 'enfieldrem');
+define ('COOKIE_STATS', 'enfieldstat');
+define ('COOKIE_SALT', 'UaZMBqi7NA');
+define ('MIN_PASSWORD_LENGTH', 6);
 
-        //create PDO connection
-        $db = new PDO("mysql:host=" . DBHOST . ";charset=utf8mb4;dbname=" . DBNAME, DBUSER, DBPASS);
-        //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);//Suggested to uncomment on production websites
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Suggested to comment on production websites
-        $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-    } catch (PDOException $e) {
-        //show error
-        echo '<p class="bg-danger">' . $e->getMessage() . '</p>';
-        exit;
-    }
-
-    return $db;
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', __DIR__ . '/' );
 }
+
+
+if (isLocalhost()) {
+
+    define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
+    define('DBHOST', 'localhost');
+    define('DBUSER', 'root');
+    define('DBPASS', '');
+    define('DBNAME', 'enfield');
+    define('IS_LOCAL', true);
+
+
+} else {
+
+    define ('SITENAME', 'https://www.fishtankpumps.co.uk/enfield/');
+    define('DBHOST', 'localhost');
+    define('DBUSER', 'fishtan2_enfield');
+    define('DBPASS', '0O6q;OU+?LqQ');
+    define('DBNAME', 'fishtan2_enfield');
+
+    define('IS_LOCAL', false);
+}
+
+define('SITEEMAIL', 'admin@fishtankpumps.co.uk');
+
+try {
+
+    //create PDO connection
+    $db = new PDO("mysql:host=" . DBHOST . ";charset=utf8mb4;dbname=" . DBNAME, DBUSER, DBPASS);
+    //$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);//Suggested to uncomment on production websites
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Suggested to comment on production websites
+    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+ 
+} catch (PDOException $e) {
+    //show error
+    echo '<p class="bg-danger">' . $e->getMessage() . '</p>';
+    exit;
+}
+
 
 /**
  * Replaces any parameter placeholders in a query with the value of that
@@ -50,7 +70,7 @@ function get_db()
  * @param array $params The array of substitution parameters
  * @return string The interpolated query
  */
- function interpolateQuery($query, $params) {
+function interpolateQuery($query, $params) {
     $keys = array();
 
     # build a regular expression for each parameter
@@ -68,6 +88,9 @@ function get_db()
 
     return $query;
 }
+//include the user class, pass in the database connection
+include( ABSPATH.'includes/user.php');
 
-$db = get_db();
-$user = get_user($db);
+$user = new User($db);
+
+require_once(ABSPATH."includes/stats.php");
