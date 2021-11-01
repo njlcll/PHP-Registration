@@ -99,6 +99,20 @@ class User
 			$stmt = $this->_db->prepare($sql);
 			$date = date('Y/m/d H:i:s');
 			$stmt->execute([$date, "", $row['id']]);
+		
+		
+			// if they've just logied in might need to change there user id
+			// in the visitor table from -1
+			if( isset($_COOKIE[COOKIE_STATS]) & function_exists('createStats')){
+				
+				$sql = "UPDATE visitors 
+				SET 
+				user=?
+				WHERE tracker=? LIMIT 1";
+				
+				$stmt = $this->_db->prepare($sql);
+				$stmt->execute(array($row['id'] , $_COOKIE[COOKIE_STATS]));
+			}
 			return $row['id'];
 		}
 		return false;

@@ -16,14 +16,14 @@ require_once('header.php');
 
 
 ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row bg-white">
-        <div class="col-12">
+        <div class="col-12 p-3">
             <div class="">
 
 
                 <h1>Visits</h1>
-                <h4>Pages visited by users</h4>
+                <h4>last 20 pages visited by users</h4>
                 <?php
                 $stmt = $db->prepare('
                 SELECT 
@@ -31,6 +31,7 @@ require_once('header.php');
                 FROM visits  
                 ORDER BY added
                 DESC
+                LIMIT 25
                 ');
                 $stmt->execute();
 

@@ -20,10 +20,11 @@ function getBrowserType()
     return $browser;
 }
 
-function getIp(){
-    if (isset($_SERVER['REMOTE_ADDR'])){
+function getIp()
+{
+    if (isset($_SERVER['REMOTE_ADDR'])) {
         return $_SERVER['REMOTE_ADDR'];
-    }else{
+    } else {
         return "";
     }
 }
@@ -40,22 +41,29 @@ function createStats()
 {
     global $db;
 
-    if (isset($_SESSION['id'])) {
-        $_SESSION['stats'] = $_SESSION['id'];
+    if (isset($_SESSION['pageLeave'])) {
+        $landing  = 0;       
     } else {
-        $_SESSION['stats'] = -1;
+        $landing  = 1;      
+    }
+
+    if (isset($_SESSION['id'])) {
+        $stats = $_SESSION['id'];
+       
+    } else {
+        $stats = -1;        
     }
 
 
     $uniqid = uniqid();
     if (!isset($_COOKIE[COOKIE_STATS])) {
-
+        //create a new visitor and set cookie
         $stmt = $db->prepare('INSERT INTO visitors 
 			(user, tracker, agent, 	ip, browser, mobile) 
 				VALUES
 			 (:user, :tracker, :agent, :ip, :browser, :mobile )');
         $stmt->execute(array(
-            ':user' => $_SESSION['stats'],
+            ':user' => $stats,
             ':tracker' => $uniqid,
             ':agent' => $_SERVER['HTTP_USER_AGENT'],
             ':ip' => $_SERVER['REMOTE_ADDR'],
@@ -68,18 +76,18 @@ function createStats()
             $uniqid,
             time() + (60 * 60 * 24 * 365)
         );
-      
-    } else {
+    } else {        
         $uniqid = $_COOKIE[COOKIE_STATS];
         setcookie(
             COOKIE_STATS,
             $uniqid,
             time() + (60 * 60 * 24 * 365)
-        );    
+        );
     }
 
     //update the last record created leave time
-    if(isset($_SESSION['pageLeave'])){
+    // $_SESSION['pageLeave'] is created when a visit is created below
+    if (isset($_SESSION['pageLeave'])) {
         $pageLeave = $_SESSION['pageLeave'];
         $sql = "UPDATE visits 
         SET 
@@ -87,22 +95,25 @@ function createStats()
         WHERE id=?";
         $stmt = $db->prepare($sql);
         $date = date('Y/m/d H:i:s');
-        $stmt->execute($date , [$_SESSION['pageLeave']);
+        $stmt->execute(array($date, $_SESSION['pageLeave']));
     }
 
     //create new page visited record
     $stmt = $db->prepare('INSERT INTO visits 
-    (v_user, v_tracker, page) 
+    (v_user, v_tracker, page, added,landing) 
         VALUES
-     (:user, :tracker, :page)');
+     (:user, :tracker, :page, :added, :landing)');
+    $date = date('Y/m/d H:i:s');
     $stmt->execute(array(
-        ':user' => $_SESSION['stats'],
+        ':user' => $stats,
         ':tracker' => $uniqid,
-        'page' => $_SERVER['REQUEST_URI']
+        'page' => $_SERVER['REQUEST_URI'],
+        'added' => $date,
+        'landing' => $landing,
 
     ));
 
-    $_SESSION['pageLeave'] = $stmt->lastInsertId();
+    $_SESSION['pageLeave'] = $db->lastInsertId();
 }
 
 
