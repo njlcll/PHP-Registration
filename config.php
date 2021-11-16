@@ -26,10 +26,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 if (isLocalhost()) {
 
     define ('SITENAME', 'https://www.');
-    define('DBHOST', 'localhost');
+    define('DBHOST', '');
     define('DBUSER', 'root');
     define('DBPASS', '');
-    define('DBNAME', 'enfield');
+    define('DBNAME', '');
     define('IS_LOCAL', true);
     define('SITE_ROOT', '/enfield/');
 
@@ -38,21 +38,14 @@ if (isLocalhost()) {
 
     define ('SITENAME', 'https://www.');
     define('DBHOST', 'localhost');
-<<<<<<< HEAD
-    define('DBUSER', 'fis');
-    define('DBPASS', '0O');
-    define('DBNAME', 'fis');
-
-=======
-    define('DBUSER', 'fishtan2_enfield');
-    define('DBPASS', '0O6q;OU+?LqQ');
-    define('DBNAME', 'fishtan2_enfield');
->>>>>>> working
+    define('DBUSER', '');
+    define('DBPASS', '0O6q;OULqQ');
+    define('DBNAME', '');
     define('IS_LOCAL', false);
-    efine('SITE_ROOT', '/');
+    define('SITE_ROOT', '/');
 }
 
-define('SITEEMAIL', 'admin@fishtankpumps.co.uk');
+define('SITEEMAIL', 'admin@.co.uk');
 
 try {
 
