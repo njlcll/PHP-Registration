@@ -1,5 +1,8 @@
-<?php require('config.php');
+<?php 
 
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 
 
 //define page title
@@ -9,7 +12,7 @@ if (isset($_POST['submit'])) {
 	require_once("includes/inc-registration.php");
 }
 if ($user->is_logged_in()) {
-	header('Location: members.php');
+	header('Location: admin-members.php');
 	exit();
 }
 
@@ -22,7 +25,7 @@ require_once("header.php");
 		<div class="col-sm-12 ">
 			<form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
 				<h2>Please Sign Up</h2>
-				<p>Already a member? <a href='login.php'>Login</a></p>
+				<p>Already a member? <a href='admin-login.php'>Login</a></p>
 				<hr>
 				<!-- <p><a href='./'>Back to home page</a></p> -->
 				<p>Please Fill in all fields</p>
@@ -30,7 +33,7 @@ require_once("header.php");
 				//check for any errors
 				if (isset($error)) {
 					foreach ($error as $error) {
-						echo '<p class="bg-info">' . $error . '</p>';
+						echo '<div class="alert alert-warning">' . $error . '</div>';
 					}
 				}
 

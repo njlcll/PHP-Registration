@@ -1,6 +1,11 @@
 <?php
-require_once('config.php');
+if (defined('ABSPATH')) {
 
+  require_once(ABSPATH . "includes/stats.php");
+ 
+} else {
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +21,9 @@ require_once('config.php');
   <meta name="robots" content="index,follow" />
   <meta name="revisit-after" content="4 days" />
 
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  <link rel="stylesheet" type="text/css" href="css/style-admin.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo SITE_ROOT ?>css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo SITE_ROOT ?>css/style.css" />
+
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
 </head>
@@ -32,7 +37,7 @@ require_once('config.php');
           <a class="nav-link font-weight-light font-smaller" href="./"> The Rotary Club of Edmonton </a>
         </span>
         <span class="cbName d-block d-sm-none">
-          <a class="nav-link " href="./">  Edmonton </a>
+          <a class="nav-link " href="./"> Edmonton </a>
         </span>
         <span class="member-link d-none d-lg-block">
 
@@ -45,13 +50,13 @@ require_once('config.php');
                 <?php
                 if ($user->is_logged_in()) {
                 ?>
-                  <li><a class="dropdown-item " href="members.php">Profile</a></li>
-                  <li><a class="dropdown-item" href="logout.php">logout</a></li>
-                  <li><a class="dropdown-item" href="changePassword.php">Change Password </a></li>
+                  <li><a class="dropdown-item " href="admin-members.php">Profile</a></li>
+                  <li><a class="dropdown-item" href="admin-logout.php">logout</a></li>
+                  <li><a class="dropdown-item" href="admin-changePassword.php">Change Password </a></li>
                 <?php
                 } else {
                 ?>
-                  <li><a class="dropdown-item active" href="login.php">Members</a></li>
+                  <li><a class="dropdown-item active" href="admin-login.php">Members</a></li>
                 <?php
                 }
                 ?>
@@ -60,7 +65,7 @@ require_once('config.php');
               </ul>
             </div>
           </div>
-          <!-- <a class="nav-link font-weight-light font-smaller" href="./members.php">Members</a> -->
+          <!-- <a class="nav-link font-weight-light font-smaller" href="./admin-members.php">Members</a> -->
 
 
         </span>
@@ -71,7 +76,7 @@ require_once('config.php');
           <div class="d-lg-none">
             <ul class="navbar-nav w-100 justify-content-between">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="./">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Features</a>
@@ -84,21 +89,21 @@ require_once('config.php');
 
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-user " aria-hidden="true"></i>  
-                Members 
+                  <i class="fa fa-user " aria-hidden="true"></i>
+                  Members
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
                   <?php
                   if ($user->is_logged_in()) {
                   ?>
-                    <li class=""><a class="dropdown-item" href="members.php">Profile</a></li>
-                    <li class=""><a class="dropdown-item" href="logout.php">logout</a></li>
-                    <li class=""><a class="dropdown-item" href="changePassword.php">Change Password </a></li>
+                    <li class=""><a class="dropdown-item" href="admin-members.php">Profile</a></li>
+                    <li class=""><a class="dropdown-item" href="admin-logout.php">logout</a></li>
+                    <li class=""><a class="dropdown-item" href="admin-changePassword.php">Change Password </a></li>
                   <?php
                   } else {
                   ?>
-                    <li class=""><a class="dropdown-item" href="login.php">Log in</a></li>
+                    <li class=""><a class="dropdown-item" href="admin-login.php">Log in</a></li>
                   <?php
                   }
                   ?>
@@ -168,4 +173,3 @@ require_once('config.php');
       <!--iiiiiii-->
     </div>
   </header>
- 

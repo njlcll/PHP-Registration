@@ -1,5 +1,8 @@
-<?php require('config.php');
+<?php 
 
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 if (!$user->is_logged_in()) {
     header('Location: index.php');
     exit();

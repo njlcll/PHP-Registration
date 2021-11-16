@@ -1,7 +1,8 @@
 <?php
 //include config
 require_once('config.php');
-
+require_once('includes/user.php');
+$user = new User($db);
 
 
 $title = 'PHP Registration and Login Demo :-Home';

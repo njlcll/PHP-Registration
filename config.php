@@ -31,17 +31,25 @@ if (isLocalhost()) {
     define('DBPASS', '');
     define('DBNAME', 'enfield');
     define('IS_LOCAL', true);
+    define('SITE_ROOT', '/enfield/');
 
 
 } else {
 
     define ('SITENAME', 'https://www.');
     define('DBHOST', 'localhost');
+<<<<<<< HEAD
     define('DBUSER', 'fis');
     define('DBPASS', '0O');
     define('DBNAME', 'fis');
 
+=======
+    define('DBUSER', 'fishtan2_enfield');
+    define('DBPASS', '0O6q;OU+?LqQ');
+    define('DBNAME', 'fishtan2_enfield');
+>>>>>>> working
     define('IS_LOCAL', false);
+    efine('SITE_ROOT', '/');
 }
 
 define('SITEEMAIL', 'admin@fishtankpumps.co.uk');
@@ -89,8 +97,7 @@ function interpolateQuery($query, $params) {
     return $query;
 }
 //include the user class, pass in the database connection
-include( ABSPATH.'includes/user.php');
+//include( ABSPATH.'includes/user.php');
 
-$user = new User($db);
 
-require_once(ABSPATH."includes/stats.php");
+

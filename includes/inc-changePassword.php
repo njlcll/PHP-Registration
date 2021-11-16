@@ -24,7 +24,7 @@ if(isset($_POST['submit'])){
                     ':resetToken' => "",
                     ':id' => $_SESSION['id']
                 ));
-                header('Location: members.php');
+                header('Location: admin-members.php');
 		//else catch the exception and show the error.
 		} catch(PDOException $e) {
 		    $error[] = $e->getMessage();

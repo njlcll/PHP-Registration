@@ -36,8 +36,8 @@ require_once('header.php');
 					<?php
 					//check for any errors
 					if (isset($error)){
-						foreach($error as $error){
-							echo '<p class="bg-danger">'.$error.'</p>';
+						foreach($error as $e){
+							echo '<div class="alert alert-warning">' . $e . '</div>';
 						}
 					}
 

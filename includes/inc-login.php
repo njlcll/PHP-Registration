@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
 			$stmt->execute([$cookieValue, $userId]);
 		}
 
-		header('Location: members.php');
+		header('Location: admin-members.php');
 		exit;
 	} else {
 		$error[] = 'Wrong email or password or your account is deactivated.';

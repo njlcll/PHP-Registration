@@ -1,7 +1,13 @@
-<?php require('config.php');
+<?php 
+/*
+Temp login for changing password
+*/
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 
 if ($user->is_logged_in()) {
-    header('Location: members.php');
+    header('Location: admin-members.php');
     exit();
 }
 
@@ -54,7 +60,7 @@ require_once('header.php');
             <div class="row">
                 <div class="col-12 text-center bg-info">
                     Unable to find your details
-                    <a  href="login.php">Home</a>
+                    <a  href="admin-login.php">Home</a>
                    
                 </div>
             </div>
@@ -66,7 +72,7 @@ require_once('header.php');
             <div class="row">
                 <div class="col-12 text-center fs-3 p3 m-4">
                     Please choose a
-                    <a href="changePassword.php">new password</a>
+                    <a href="admin-changePassword.php">new password</a>
                      to continue using the site
                 </div>
             </div>
