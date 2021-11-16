@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 			$body = "<p>Someone requested that the password be reset.</p>
 			<p>If this was a mistake, just ignore this email and nothing will happen.</p>
 			<p>To reset your password, visit the following address: 
-			<a href='" . SITENAME . "tokenPassword.php?resetToken=$token'>" . SITENAME . "tokenPassword.php?resetToken=$token</a></p>";
+			<a href='" . SITENAME . "admin-tokenPassword.php?resetToken=$token'>" . SITENAME . "tokenPassword.php?resetToken=$token</a></p>";
 
 			if (IS_LOCAL) {
 				echo $body;

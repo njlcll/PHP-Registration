@@ -1,8 +1,11 @@
-<?php require('config.php');
+<?php
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 
 //if logged in redirect to members page
 if ($user->is_logged_in()) {
-	header('Location: members.php');
+	header('Location: admin-members.php');
 	exit();
 }
 if (isset($_POST['submit'])) {
@@ -16,11 +19,8 @@ $title = 'Reset Account';
 require_once('header.php');
 
 if (isset($_POST['submit'])) {
-	if (isset($error)) {
-		foreach ($error as $error) {
-			echo '<p class="bg-info">' . $error . '</p>';
-		}
-	} else {
+	if (!isset($error)) {
+
 ?>
 		<div class="d-flex justify-content-center align-items-center">
 			<div class="row form-holder">
@@ -43,14 +43,14 @@ if (isset($_POST['submit'])) {
 		<div class="col-12">
 			<form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" autocomplete="off">
 				<h2>Reset Password</h2>
-				<p><a href='login.php'>Back to login page</a></p>
+				<p><a href='admin-login.php'>Back to login page</a></p>
 				<hr>
 
 				<?php
 				//check for any errors
 				if (isset($error)) {
-					foreach ($error as $error) {
-						echo '<p class="bg-info">' . $error . '</p>';
+					foreach ($error as $e) {
+						echo '<div class="alert alert-warning">' . $e . '</div>';
 					}
 				}
 

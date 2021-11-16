@@ -1,8 +1,11 @@
 <?php
 //include config
 require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
+
 if (!$user->is_logged_in()) {
-    header('Location: login.php');
+    header('Location: admin-login.php');
     exit();
 }
 // print_r($_SESSION);
@@ -28,16 +31,16 @@ require_once('header.php');
 
                     <ul class="nav list-group list-group-horizontal-sm list-group-vertical-md">
                         <li class="nav-item admin-nav-left">
-                            <a class="nav-link nav-rotary" aria-current="page" href="changePassword">Change Password</a>
+                            <a class="nav-link nav-rotary" aria-current="page" href="admin-changePassword">Change Password</a>
                         </li>
 
                         <li class="nav-item admin-nav-left">
-                            <a class="nav-link nav-rotary" href="template.php" tabindex="-1" >Example </a>
+                            <a class="nav-link nav-rotary" href="admin-template.php" tabindex="-1" >Example </a>
                         </li>
                      
                     </ul>
                     <?php
-                        include_once(dirname(__FILE__)."/memberNav.php");
+                        include_once(dirname(__FILE__)."/admin-memberNav.php");
                     ?>
 
                     </div>

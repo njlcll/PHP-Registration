@@ -1,4 +1,7 @@
-<?php require('config.php');
+<?php 
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 
 if (!$user->is_logged_in()) {
     header('Location: index.php');
@@ -25,8 +28,8 @@ require_once('header.php');
                 <div class="col-12">
                     <?php
                     if (isset($error)) {
-                        foreach ($error as $error) {
-                            echo '<p class="bg-info">' . $error . '</p>';
+                        foreach ($error as $e) {
+                            echo '<div class="alert alert-warning">' . $e . '</div>';
                         }
                     }
                     ?>

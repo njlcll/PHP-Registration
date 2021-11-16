@@ -1,9 +1,11 @@
 <?php
-require('config.php');
+require_once('config.php');
+require_once('includes/user.php');
+$user = new User($db);
 
 //check if already logged in move to home page
 if ($user->is_logged_in()) {
-	header('Location: members.php');
+	header('Location: admin-members.php');
 	exit();
 }
 
@@ -24,7 +26,7 @@ require_once('header.php');
 		<div class=" col-sm-12 ">
 			<form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
 				<h2>Please Login</h2>
-				<p>Not a member? <a href='registration.php'>Register</a></p>
+				<p>Not a member? <a href='admin-registration.php'>Register</a></p>
 				<hr>
 
 				<?php
@@ -32,7 +34,7 @@ require_once('header.php');
 
 				if (isset($error)) {
 					foreach ($error as $error) {
-						echo '<p class="bg-info">' . $error . '</p>';
+						echo '<div class="alert alert-warning">' . $error . '</div>';
 					}
 				}
 
@@ -74,7 +76,7 @@ require_once('header.php');
 
 				<div class="row">
 					<div class="col-xs-9 col-sm-9 col-md-9 p-2">
-						<a href='lostPassword.php'>Forgot your Password?</a>
+						<a href='admin-lostPassword.php'>Forgot your Password?</a>
 					</div>
 				</div>
 

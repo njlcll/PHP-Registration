@@ -18,42 +18,31 @@ if (isset($_POST['submit'])) {
 		$error[] = "Please fill out all fields";
 	}
 
+	$email = htmlspecialchars_decode($_POST['email'], ENT_QUOTES);
+	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+		$error[] = 'Please enter a valid email address';
+	}
 	
 	$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
-	$stmt->execute(array(':email' => $_POST['email']));
+	$stmt->execute(array(':email' => $email));
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	if (!empty($row['email'])) {
-		$error[] = 'Email provided is already in use.';
+		$error[] = 'Email provided is already in use. Please Login';
 	}
 
 
 	$user->check_password($_POST, $error);
 
-	//email validation
-	$email = htmlspecialchars_decode($_POST['email'], ENT_QUOTES);
-	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		$error[] = 'Please enter a valid email address';
-	} else {
-		$stmt = $db->prepare('SELECT email FROM users WHERE email = :email');
-		$stmt->execute(array(':email' => $_POST['email']));
-		$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		if (!empty($row['email'])) {
-			$error[] = 'Email provided is already in use.';
-		}
-	}
 
 	if (!isset($error)) {
 
 		//hash the password
 		$hashedpassword = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
-		//create the activasion code
-		//$activasion = md5(uniqid(rand(),true));
 
 		try {
-			//insert into database with a prepared statement
+	
 			$stmt = $db->prepare('INSERT INTO users 
 			(name, surname, email,password, active, priv) 
 				VALUES
