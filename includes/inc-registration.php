@@ -3,20 +3,14 @@
 //if form has been submitted process it
 if (isset($_POST['submit'])) {
 
-	if (!isset($_POST['name'])) {
+	if (!($_POST['name'])) {
 		$error[] = "Please fill out all fields";
 	}
-	if (!isset($_POST['surname'])) {
-		$error[] = "Please fill out all fields";
-	}
-
-	if (!isset($_POST['email'])) {
+	if (!($_POST['surname'])) {
 		$error[] = "Please fill out all fields";
 	}
 
-	if (!isset($_POST['password'])) {
-		$error[] = "Please fill out all fields";
-	}
+	
 
 	$email = htmlspecialchars_decode($_POST['email'], ENT_QUOTES);
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
