@@ -44,27 +44,27 @@ require_once("header.php");
 				?>
 
 				<div class="form-group p-2">
-					<input type="text" name="name" id="name" class="form-control input-lg" placeholder="First Name" value="<?php if (isset($error)) {
+					<input type="text" required name="name" id="name" class="form-control input-lg" placeholder="First Name" value="<?php if (isset($error)) {
 																																echo htmlspecialchars($_POST['name'], ENT_QUOTES);
 																															} ?>" tabindex="1">
 				</div>
 				<div class="form-group  p-2">
-					<input type="text" name="surname" id="surname" class="form-control input-lg" placeholder="Last Name" value="<?php if (isset($error)) {
+					<input type="text" required name="surname" id="surname" class="form-control input-lg" placeholder="Last Name" value="<?php if (isset($error)) {
 																																	echo htmlspecialchars($_POST['surname'], ENT_QUOTES);
 																																} ?>" tabindex="1">
 				</div>
 				<div class="form-group  p-2">
-					<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" value="<?php if (isset($error)) {
+					<input type="email" required name="email" id="email" class="form-control input-lg" placeholder="Email Address" value="<?php if (isset($error)) {
 																																		echo htmlspecialchars($_POST['email'], ENT_QUOTES);
 																																	} ?>" tabindex="2">
 				  </div>
 				<div class="form-group  p-2">
-					<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="3">
+					<input type="password" required name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="3">
 
 				</div>
 
 				<div class="form-group  p-2">
-					<input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control input-lg" placeholder="Confirm Password" tabindex="4">
+					<input type="password" required name="passwordConfirm" id="passwordConfirm" class="form-control input-lg" placeholder="Confirm Password" tabindex="4">
 				</div>
 
 
